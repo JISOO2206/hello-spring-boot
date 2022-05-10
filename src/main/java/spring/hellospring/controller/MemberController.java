@@ -2,7 +2,13 @@ package spring.hellospring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import spring.hellospring.domain.Member;
 import spring.hellospring.service.MemberService;
+
+import java.util.List;
 
 /*
     @Component : 이 어노테이션이 붙어있으면,
@@ -39,5 +45,26 @@ public class MemberController {
         class, interface들만 적용이 가능하다
      */
 
+    @GetMapping("/members/new")
+    public String createForm(){
+        return "members/createMemberForm";
+    }
+    @PostMapping("/members/new")
+    public String create(MemberForm form){
+        Member member = new Member();
+        member.setName(form.getName());
 
+        memberService.join(member);
+
+        return "redirect:/";
+    }
+
+    //url은 같지만 get이냐 post냐에 따라서 다르게 사용할 수 있음.
+
+    @GetMapping("/members")
+    public String list(Model model) {
+        List<Member> members = memberService.findMembers();
+        model.addAttribute("members", members);
+        return "members/memberList";
+    }
 }
