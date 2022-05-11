@@ -12,6 +12,7 @@
             </thead>
             <tbody>
             <tr th:each="member : ${members}">
+                <td th:text="${member.memberId}"></td>
                 <td th:text="${member.name}"></td>
             </tr>
             </tbody>
@@ -20,3 +21,5 @@
 </div> <!-- /container -->
 </body>
 </html>
+
+//${} 안에 들어가는 변수이름에 (_)가 들어가면 안 됨.

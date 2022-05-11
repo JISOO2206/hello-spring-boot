@@ -30,7 +30,7 @@ public class MemberService {
         // 같은 이름이 있는 중복 회원X
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
-        return member.getmember_idx();
+        return member.getMemberId();
     }
 
     private void validateDuplicateMember(Member member) {
@@ -47,8 +47,8 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Optional<Member> findOne(Long member_idx){
-        return memberRepository.findById(member_idx);
+    public Optional<Member> findOne(Long memberId){
+        return memberRepository.findById(memberId);
     }
 
 }

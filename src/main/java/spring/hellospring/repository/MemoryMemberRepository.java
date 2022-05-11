@@ -18,14 +18,14 @@ public class MemoryMemberRepository implements MemberRepository{
 
     @Override
     public Member save(Member member) {
-        member.setmember_idx(++sequence);
-        store.put(member.getmember_idx(), member);
+        member.setMemberId(++sequence);
+        store.put(member.getMemberId(), member);
         return member;
     }
 
     @Override
-    public Optional<Member> findById(Long member_idx) {
-        return Optional.ofNullable(store.get(member_idx));
+    public Optional<Member> findById(Long memberId) {
+        return Optional.ofNullable(store.get(memberId));
         // null이 반환될 가능성이 있으면 optional.ofNullable()로 감싸준다.
     }
 
