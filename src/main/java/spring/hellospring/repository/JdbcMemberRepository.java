@@ -9,13 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class jdbcMemberRepository implements MemberRepository {
+public class JdbcMemberRepository implements MemberRepository {
 
     private final DataSource dataSource;
 
-    public jdbcMemberRepository(DataSource dataSource) {
+    public JdbcMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
+    // 이 생성자에서 getConnection을 만들면 기능을 사용할 때마다
+    // 새로운 Connection이 생성됨.
 
     @Override
     public Member save(Member member) {
@@ -70,6 +72,7 @@ public class jdbcMemberRepository implements MemberRepository {
                 member.setMemberId(rs.getLong("id"));
                 member.setName(rs.getString("name"));
                 return Optional.of(member);
+                // 값이 있다면 객체를 생성한 후에 값을 반환해줌.
             } else {
                 return Optional.empty();
             }
@@ -130,6 +133,8 @@ public class jdbcMemberRepository implements MemberRepository {
     private Connection getConnection() {
         return DataSourceUtils.getConnection(dataSource);
     }
+    // getConnection은 DataSourceUtils을 통해서 얻어야 한다.
+
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs)
     {
         try {
