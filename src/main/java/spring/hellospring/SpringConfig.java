@@ -19,28 +19,36 @@ public class SpringConfig {
 //        this.dataSource = dataSource;
 //    }
 
-    private EntityManager em;
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(EntityManager em) {
+//        this.em = em;
+//    }
+
+    private final MemberRepository memberRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em) {
-        this.em = em;
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     @Bean
     public MemberService memberService(){
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository);
     }
     /*
         @Configuration을 읽고 해당 @Bean을 보고
         Spring Bean에 등록하라는 뜻으로 인식한다.
      */
 
-    @Bean
-    public MemberRepository memberRepository() {
-        //return new MemoryMemberRepository();
-//        return new jdbcTemplateMemberRepository(dataSource);
-        return new JpaMemberRepository(em);
-    }
+//    @Bean
+//    public MemberRepository memberRepository() {
+//        //return new MemoryMemberRepository();
+////        return new jdbcTemplateMemberRepository(dataSource);
+////        return new JpaMemberRepository(em);
+//        return new JpaMemberRepository(em);
+//    }
 
     /*
         spring이 run 상태가 되면 두 개 모두 Spring Bean에 등록한 후
