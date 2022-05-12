@@ -3,6 +3,7 @@ package spring.hellospring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import spring.hellospring.aop.TimeTraceAop;
 import spring.hellospring.repository.*;
 import spring.hellospring.service.MemberService;
 
@@ -41,6 +42,12 @@ public class SpringConfig {
         @Configuration을 읽고 해당 @Bean을 보고
         Spring Bean에 등록하라는 뜻으로 인식한다.
      */
+
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();
+//    }
+//    //AOP에 @Component를 쓰지 않았으면 빈을 생성해 만들어줘야 한다.
 
 //    @Bean
 //    public MemberRepository memberRepository() {
