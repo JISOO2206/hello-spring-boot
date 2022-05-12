@@ -5,9 +5,10 @@ import javax.persistence.*;
 @Entity
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @Column(name = "id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;    //고객이 정하는 id가 아니라 시스템이 정하는 id
 
+    @Column(name = "name")
     private String name;
 
     public Long getMemberId() {
